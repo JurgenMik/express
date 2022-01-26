@@ -1,20 +1,20 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-// add public direction
-app.use(express.static('public'));
-//add views directory path
-app.set('views', path.join(__dirname, 'views'));
-// add views template engine
-app.set('view egning', 'ejs');
+const express = require('express')
+const app = express()
 
-app.get('/user/:username', (req, res)=>{
-    // get parameter data from addressrow
-    let user =req.params.username;
-    // use data in template
-    res.render('index.ejs', {username:user});
-});
+const path = require('path')
 
-app.listen(3000,()=>{
-    console.log('Server started on http://localhost:3000');
-});
+app.set('views', path.join(__dirname ,'views'))
+app.set('view engine', 'ejs')
+
+app.get('/questions', (req,res)=> {
+
+    let questions = [
+        {title: "What is node.js?", user : "Kadi", votes:"10"},{
+        title: "What is Express.js?", user : "Mike", votes:"8"}
+    ]
+    res.render('index', {questions:questions})
+})
+
+app.listen(3000, ()=>{
+    console.log('Server started on http://localhost:3000')
+})
